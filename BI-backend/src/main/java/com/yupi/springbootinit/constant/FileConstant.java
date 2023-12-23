@@ -1,4 +1,4 @@
-package com.yupi.springbootinit.mq.constant;
+package com.yupi.springbootinit.constant;
 
 /**
  * 文件常量

@@ -1,6 +1,6 @@
 spring:
   application:
-    name:
+    name: yubi-backend
   # 默认 dev 环境
   profiles:
     active: dev
@@ -27,7 +27,7 @@ spring:
     database: 1
     host: 175.178.249.250
     port: 6379
-    timeout: 500000
+    timeout: 5000
     password: zrl021051
   # Elasticsearch 配置
   # todo 需替换配置，然后取消注释
@@ -40,11 +40,6 @@ spring:
     multipart:
       # 大小限制
       max-file-size: 10MB
-#  rabbitmq:
-#    host: localhost
-#    port: 5672
-#    password: guest
-#    username: guest
 server:
   address: 0.0.0.0
   port: 8080
@@ -92,8 +87,3 @@ cos:
     secretKey: xxx
     region: xxx
     bucket: xxx
-# 鱼聪明 AI 配置（https://yucongming.com/）
-yuapi:
-  client:
-    access-key: 替换为你自己的 access-key
-    secret-key: 替换为你自己的 secret-key

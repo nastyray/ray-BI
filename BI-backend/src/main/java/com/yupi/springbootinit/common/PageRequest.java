@@ -1,6 +1,6 @@
 package com.yupi.springbootinit.common;
 
-import com.yupi.springbootinit.mq.constant.CommonConstant;
+import com.yupi.springbootinit.constant.CommonConstant;
 import lombok.Data;
 
 /**
