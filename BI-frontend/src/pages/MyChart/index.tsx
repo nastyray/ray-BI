@@ -1,10 +1,11 @@
-import { listMyChartByPageUsingPOST } from '@/services/yubi/chartController';
+import {deleteChartUsingPOST, listMyChartByPageUsingPOST} from '@/services/yubi/chartController';
 
 import { useModel } from '@@/exports';
-import {Avatar, Card, List, message, Result} from 'antd';
+import {Avatar, Button, Card, Col, Divider, List, message, Modal, Result, Row} from 'antd';
 import ReactECharts from 'echarts-for-react';
 import React, { useEffect, useState } from 'react';
 import Search from "antd/es/input/Search";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 /**
  * 我的图表页面
@@ -49,6 +50,36 @@ const MyChartPage: React.FC = () => {
       message.error('获取我的图表失败，' + e.message);
     }
     setLoading(false);
+  };
+
+  /**
+   * 删除图表
+   * @param chartId
+   */
+  const handleDelete = (chartId: any) => {
+    Modal.confirm({
+      title: '确认删除',
+      icon: <ExclamationCircleOutlined />,
+      content: '确定要删除这个图表吗？',
+      okText: '确认',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          const res = await deleteChartUsingPOST({ id: chartId });
+          // 后端返回 boolean值
+          console.log("res:",res.data);
+          if (res.data) {
+            message.success('删除成功');
+            // 删除成功后重新加载图表数据
+            loadData();
+          } else {
+            message.error('删除失败');
+          }
+        } catch (e: any) {
+          message.error('删除失败' + e.message);
+        }
+      },
+    });
   };
 
   useEffect(() => {
@@ -135,6 +166,17 @@ const MyChartPage: React.FC = () => {
                     />
                   </>
                 }
+                <Divider style={{ fontWeight: 'bold', color: 'blue', fontSize: '16px' }}>
+                  智能分析结果
+                </Divider>
+                <p style={{ fontWeight: 'bold', color: '#0b93a1' }}>{item.genResult}</p>
+                <Row justify="end">
+                  <Col>
+                    <Button danger onClick={() => handleDelete(item.id)}>
+                      删除
+                    </Button>
+                  </Col>
+                </Row>
               </>
             </Card>
           </List.Item>

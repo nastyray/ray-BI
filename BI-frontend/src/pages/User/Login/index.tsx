@@ -13,7 +13,7 @@ import Settings from '../../../../config/defaultSettings';
 
 const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
-  const { initialState, setInitialState } = useModel('@@initialState');
+  const { initialState,refresh, setInitialState } = useModel('@@initialState');
   const containerClassName = useEmotionCss(() => {
     return {
       display: 'flex',
@@ -35,6 +35,9 @@ const Login: React.FC = () => {
   /**
    * 登陆成功后，获取用户登录信息
    */
+  /**
+   * 登陆成功后，获取用户登录信息
+   */
   const fetchUserInfo = async () => {
     const userInfo = await getLoginUserUsingGET();
     if (userInfo) {
@@ -47,6 +50,7 @@ const Login: React.FC = () => {
     }
   };
 
+
   const handleSubmit = async (values: API.UserLoginRequest) => {
     try {
       // 登录
@@ -57,6 +61,7 @@ const Login: React.FC = () => {
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
         history.push(urlParams.get('redirect') || '/');
+        refresh();
         return;
       } else {
         message.error(res.message);

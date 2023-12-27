@@ -202,6 +202,18 @@ declare namespace API {
     userRole?: string;
   };
 
+  type CurrentUser = {
+    createTime?: string;
+    id?: number;
+    updateTime?: string;
+    userAvatar?: string;
+    userName?: string;
+    userProfile?: string;
+    userRole?: string;
+    access?: string;
+
+  };
+
   type OrderItem = {
     asc?: boolean;
     column?: string;
