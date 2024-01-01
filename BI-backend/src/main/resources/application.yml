@@ -71,7 +71,7 @@ wx:
       http-client-type: HttpClient
       key-prefix: wx
       redis:
-        host: 127.0.0.1
+        host: 175.178.249.250
         port: 6379
       type: Memory
   # 微信开放平台

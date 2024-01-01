@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Data
-@ConfigurationProperties(prefix = "spring.redis")
 @Configuration
+@ConfigurationProperties(prefix = "spring.redis")
 public class RedissonConfig {
     private Integer database;
     private String host;
@@ -18,13 +18,13 @@ public class RedissonConfig {
     private String password;
 
     @Bean
-    public RedissonClient redissonClient() {
+    public RedissonClient getredissonClient() {
         Config config = new Config();
         config.useSingleServer()
                 .setDatabase(database)
                 .setAddress("redis://" + host + ":" + port)
                 .setPassword(password);
-        RedissonClient redisson = Redisson.create();
+        RedissonClient redisson = Redisson.create(config);
         return redisson;
     }
 }
